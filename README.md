@@ -42,32 +42,35 @@ Below are gif demos of my project to show the above technical requirements.
 ##### Initial State
 
 When I first access to this website, it shows 5 random space's images. Here is what I used query parameter `count=5`. Each image result lists a title, date of capture and a button to “like” that image. Each image can be “liked”, and a user is able to undo their “like”
-gif1
+
+![1](https://user-images.githubusercontent.com/46732468/149686562-26f23e1d-0646-479e-9b29-461dd42d2755.gif)
 
 ##### Save likes if the user leaves or reloads the page
 
 By using localstorage of browser, I saved likes when the user leaves or reloads the page
-gif2
 
 ##### Animate the “like” action
 
 By using CSS, I made a like action which The heart shape increases and returns to its original size.
-gif2
+
+![2](https://user-images.githubusercontent.com/46732468/149686924-c7fb31a6-d8d9-463a-9e95-24346372c14b.gif)
 
 ##### Add a loading state while we wait for NASA’s API to return data
 
-gif3
+![3](https://user-images.githubusercontent.com/46732468/149687048-4e616d69-98c7-4eb2-8619-aa9c08580661.gif)
 
 ##### Create shareable links for each image
 
 Each image has a link image. We can copy the shareable link by clicking the link image.
-gif4
+
+![4](https://user-images.githubusercontent.com/46732468/149687946-6e2e92cb-4855-4d78-8e31-0a2ee7a6c058.gif)
 
 ##### Add a date-picker to be able to browse photos starting from a specific date
 
 With start date and end date information, we can search the photos from the start date to the end date.
-gif5
+
+![5](https://user-images.githubusercontent.com/46732468/149687978-b679c3b9-b73d-4be4-ac21-5845f77a2cc2.gif)
 
 ##### Add a fabicon image to the title for spaceStagram & Responsive website & random button
 
-gif6
+![6](https://user-images.githubusercontent.com/46732468/149688003-a4b4935d-b332-454b-abe1-8868850961ee.gif)
