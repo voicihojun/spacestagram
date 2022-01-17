@@ -21,51 +21,33 @@ function App() {
   const [startDateStr, setStartDateStr] = useState("");
   const [endDateStr, setEndDateStr] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [text, setText] = useState("");
 
   const fetchImagesDefault = async () => {
     const { data: imgs } = await axios.get(
       `https://api.nasa.gov/planetary/apod?api_key=bbkSglcrskxOTKlFsmm1354NxeHRetmw6Ec2GbCw&count=5`
     );
-    console.log("fetchImagesDefault");
-    console.log(imgs);
     setImages(imgs);
     setIsLoading(false);
   };
 
   const API = `https://api.nasa.gov/planetary/apod?api_key=bbkSglcrskxOTKlFsmm1354NxeHRetmw6Ec2GbCw&start_date=${startDateStr}&end_date=${endDateStr}`;
   const fetchImagesWithDate = async () => {
-    // setIsLoading(true);
     const { data: imgs } = await axios.get(API);
-    console.log("fetchImagesWithDate");
-    console.log(imgs);
     setImages(imgs);
-
     setStartDate(null);
     setEndDate(null);
+    setStartDateStr("");
+    setEndDateStr("");
     setIsLoading(false);
   };
 
   const onSubmit = (e) => {
     if (startDateStr !== "" && endDateStr !== "") {
-      // null이랑 "" 은 같지 않다.
       setIsLoading(true);
       localStorage.clear();
       e.preventDefault();
-
-      console.log("onSubmit");
-
-      console.log(startDateStr);
-      console.log(endDateStr);
       fetchImagesWithDate();
     }
-    // } else {
-    //   console.log(startDateStr);
-    //   console.log(endDateStr);
-    //   console.log("else else");
-
-    //   setText("pls enter the dates");
-    // }
   };
 
   localStorage.setItem("images", JSON.stringify(images));
@@ -84,33 +66,22 @@ function App() {
   };
 
   const handleStartDate = (date) => {
-    console.log("##### START: " + date);
     setStartDate(date);
-    console.log(startDate);
-    console.log("type of startDate" + typeof startDate);
     const dateStr = moment(date).format().substring(0, 10);
-    console.log(typeof dateStr);
     setStartDateStr(dateStr);
-    console.log("startDateStr : " + startDateStr);
-    console.log("type of startDateStr" + typeof startDateStr);
   };
 
   const handleEndDate = (date) => {
-    console.log("###### END: " + date);
     setEndDate(date);
-    console.log("endDate : " + endDate);
-    console.log("type of endDate : " + typeof endDate);
     const dateStr = moment(date).format().substring(0, 10);
-    console.log(typeof dateStr);
     setEndDateStr(dateStr);
-    console.log("endDateStr : " + endDateStr);
+  };
+
+  const handleRandomButton = () => {
+    localStorage.clear();
   };
 
   useEffect(() => {
-    console.log("USE EFFECT!!!!!!!!");
-    console.log("startDateStr : " + startDateStr);
-    console.log("endDateStr :  " + endDateStr);
-    console.log("API : " + API);
     if (images.length === 0) {
       fetchImagesDefault(); // 초기에는 보여줄 image 가 없으니까 그냥 5장 가져와서 보여줌.
     } else {
@@ -135,7 +106,6 @@ function App() {
                   <div className="start-date">start date</div>
                   <div>
                     <DatePicker
-                      placeholder="yyyy-MM-dd"
                       selected={startDate}
                       dateFormat="yyyy-MM-dd" // 날짜 형식
                       onChange={handleStartDate}
@@ -157,7 +127,7 @@ function App() {
               </div>
             </div>
             <button>submit</button>
-            <span id="error">{text}</span>
+            <button onClick={handleRandomButton}>random</button>
           </form>
         </div>
       </div>
@@ -172,7 +142,7 @@ function App() {
         ) : (
           <div className="image-content-wrapper">
             {images.map((image) => (
-              <div>
+              <div key={image.url}>
                 <div className="image-wrapper">
                   <img
                     className="image"
